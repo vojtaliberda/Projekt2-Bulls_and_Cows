@@ -16,10 +16,11 @@ print(oddelovac)
 
 def generate_unique_number():
     while True:
-        number = random.sample(range(1, 10), 4)
+        number = random.sample(range(10), 4) 
+        if number[0] == 0:
+            continue  
         unique_number = int(''.join(map(str, number)))
-        if unique_number not in generated_numbers:
-            generated_numbers.add(unique_number)
+        if 1000 <= unique_number <= 9999:
             return unique_number
 
 generated_numbers = set()
@@ -69,13 +70,13 @@ def main():
             print(oddelovac)
             print(f"Correct, you've guessed the right number: {guesses[-1]}.")
             print(oddelovac)
-            if len(guesses) <= 3:
+            if len(guesses) <= 5:
                 print(f"You guessed the number in {len(guesses)} guesses. That's amazing !!! \nHere are your guesses: {guesses}")
-            elif 3 < len(guesses) <= 6:
+            elif 5 < len(guesses) <= 10:
                 print(f"You guessed the number in {len(guesses)} guesses. That's great! \nHere are your guesses: {guesses}")
-            elif 6 < len(guesses) <= 9:
+            elif 10 < len(guesses) <= 15:
                 print(f"You guessed the number in {len(guesses)} guesses. That's not bad :) \nHere are your guesses: {guesses}")
-            elif 9 < len(guesses):
+            elif 15 < len(guesses):
                 print(f"You guessed the number in {len(guesses)} guesses. That's quite bad :( \nHere are your guesses: {guesses}")
             print(oddelovac)
             break
@@ -83,7 +84,14 @@ def main():
             print(oddelovac)
             bulls, cows = get_feedback(unique_number, input_uz)
             print(f">>>  {guesses[-1]}")
-            print(f"Bulls: {bulls}, Cows: {cows}")
+            if bulls == 1 and cows != 1:
+                print(f"Bull: {bulls}, Cows: {cows}")
+            elif cows == 1 and bulls != 1:
+                print(f"Bulls: {bulls}, Cow: {cows}")
+            elif cows == 1 and bulls == 1:
+                print(f"Bull: {bulls}, Cow: {cows}")
+            else: 
+                print (f"Bulls: {bulls}, Cows: {cows}")
             print(oddelovac)
 
 if __name__ == "__main__":
